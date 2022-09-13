@@ -38,3 +38,12 @@ def feedbackValidation():
 if __name__ == "__main__":
     app.run(debug=ON)
     
+
+## FOR TESTING   
+
+# http://127.0.0.1:5000/sentiment
+
+# {
+# 	"rate": 1,
+# 	"feedback": "very bad"
+# }
