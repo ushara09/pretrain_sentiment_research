@@ -1,6 +1,7 @@
 from tkinter import ON
 from flask import Flask, request, jsonify
 from transformers import pipeline
+import json
 
 app = Flask(__name__)
 
@@ -33,11 +34,21 @@ def feedbackValidation():
     result = specific_model(feedback)
     sentimentValue = result[0]['label'] # positive - POS / negative - NEG / Neutral - NEU
     finalValue = ratingAndFeedbackMatching(rate, sentimentValue)
-    return finalValue
+    finalObject = {"sentimentValue": sentimentValue, "finalDisition": finalValue}
+
+    # convert to JSON
+    finalJSONObject = json.dumps(finalObject)
+    return finalJSONObject
+
+@app.route("/check", methods = ["POST"])
+def checkReviews():
+    feedback = request.json['review']
+    specific_model = pipeline(model="finiteautomata/bertweet-base-sentiment-analysis")
+    result = specific_model(feedback)
+    return result
 
 if __name__ == "__main__":
     app.run(debug=ON)
-    
 
 ## FOR TESTING   
 
