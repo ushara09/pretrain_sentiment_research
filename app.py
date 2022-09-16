@@ -1,4 +1,3 @@
-from tkinter import ON
 from flask import Flask, request, jsonify
 from transformers import pipeline
 import json
@@ -48,7 +47,7 @@ def checkReviews():
     return result
 
 if __name__ == "__main__":
-    app.run(debug=ON)
+    app.run()
 
 ## FOR TESTING   
 
